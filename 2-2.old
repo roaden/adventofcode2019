@@ -1,0 +1,47 @@
+#read file
+foo = open('2-1.txt', 'r')
+
+mainInput = foo.readline().rstrip('\n').split(',')
+
+for i in range(len(mainInput)):
+    mainInput[i] = int(mainInput[i])
+
+
+def intComputer(new):
+    opNum = 0
+    intStack = []
+
+    for i in new:
+        intStack.append(new)
+
+    while opNum <= len(intStack):
+        if intStack[opNum] == 99:
+            break
+        elif intStack[opNum] == 1:
+            foo = intStack[opNum + 1]
+            bar = intStack[opNum + 2]
+            baz = intStack[opNum + 3]
+            intStack[baz] = intStack[foo] + intStack[bar]
+        elif intStack[opNum] == 2:
+            foo = intStack[opNum + 1]
+            bar = intStack[opNum + 2]
+            baz = intStack[opNum + 3]
+            intStack[baz] = intStack[foo] * intStack[bar]
+        else:
+            print("Error, unexpected code encountered at " + str(opNum) + " with value " + str(intStack[opNum]))
+            break
+        opNum += 4
+    return intStack
+
+rightNoun = -1
+rightVerb = -1
+
+gotit = False
+
+for noun in range(100):
+    for verb in range(100):
+        mainInput[1] = noun
+        mainInput[2] = verb
+        if intComputer(mainInput)[0] == 19690720:
+            print("Found it. Noun is ", noun, " and verb is ", verb)
+            print(100*noun + verb)
